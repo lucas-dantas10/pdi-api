@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Domain\Entity\Wallet" table="s_wallet" read-only="true">
+        <id name="id" column="nu_seq_wallet" type="integer">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <one-to-one field="user" target-entity="App\Domain\Entity\User" inversed-by="wallet">
+            <join-column name="nu_seq_user" referenced-column-name="nu_seq_user" />
+        </one-to-one>
+
+        <one-to-many field="sentTransactions" target-entity="App\Domain\Entity\Transaction" mapped-by="senderWallet" />
+
+        <one-to-many field="receivedTransactions" target-entity="App\Domain\Entity\Transaction" mapped-by="receiverWallet" />
+
+        <field name="balance" column="nu_balance" type="decimal" precision="10" scale="2">
+            <options>
+                <option name="default">0.00</option>
+            </options>
+        </field>
+    </entity>
+
+</doctrine-mapping>
