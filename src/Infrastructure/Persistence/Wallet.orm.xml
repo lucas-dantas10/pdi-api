@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="App\Domain\Entity\Wallet" table="s_wallet" read-only="true">
+    <entity name="App\Domain\Entity\Wallet" table="s_wallet">
         <id name="id" column="nu_seq_wallet" type="integer">
-            <generator strategy="AUTO"/>
+            <generator/>
         </id>
 
         <one-to-one field="user" target-entity="App\Domain\Entity\User">
