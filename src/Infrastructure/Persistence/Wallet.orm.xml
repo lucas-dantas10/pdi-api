@@ -8,13 +8,21 @@
             <generator strategy="AUTO"/>
         </id>
 
-        <one-to-one field="user" target-entity="App\Domain\Entity\User" inversed-by="wallet">
+        <one-to-one field="user" target-entity="App\Domain\Entity\User">
             <join-column name="nu_seq_user" referenced-column-name="nu_seq_user" />
         </one-to-one>
 
-        <one-to-many field="sentTransactions" target-entity="App\Domain\Entity\Transaction" mapped-by="senderWallet" />
+        <one-to-many field="sentTransactions" target-entity="App\Domain\Entity\Transaction" mapped-by="senderWallet">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
 
-        <one-to-many field="receivedTransactions" target-entity="App\Domain\Entity\Transaction" mapped-by="receiverWallet" />
+        <one-to-many field="receivedTransactions" target-entity="App\Domain\Entity\Transaction" mapped-by="receiverWallet">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
 
         <field name="balance" column="nu_balance" type="decimal" precision="10" scale="2">
             <options>

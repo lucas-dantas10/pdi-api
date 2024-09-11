@@ -9,10 +9,16 @@
         </id>
 
         <many-to-one field="senderWallet" target-entity="App\Domain\Entity\Wallet">
+            <cascade>
+                <cascade-all />
+            </cascade>
             <join-column name="nu_seq_sender_wallet" referenced-column-name="nu_seq_wallet" />
         </many-to-one>
 
         <many-to-one field="receiverWallet" target-entity="App\Domain\Entity\Wallet">
+            <cascade>
+                <cascade-all />
+            </cascade>
             <join-column name="nu_seq_receiver_wallet" referenced-column-name="nu_seq_wallet" />
         </many-to-one>
 
