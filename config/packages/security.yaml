@@ -22,8 +22,8 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-#         - { path: ^/api/v1/, roles: ROLE_USER }
-#         - { path: ^/api/v1/transaction, roles: [ROLE_USER, ROLE_COMMON] }
+         - { path: ^/api/v1/, roles: ROLE_USER }
+         - { path: ^/api/v1/transaction, roles: [ROLE_USER, ROLE_COMMON] }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
