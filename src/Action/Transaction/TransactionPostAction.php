@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Adapter\Http\Transaction;
+namespace App\Action\Transaction;
 
 use App\Domain\Service\Transaction\TransactionServiceInterface;
 use App\Infrastructure\Dto\Transaction\CreateTransactionDTO;
