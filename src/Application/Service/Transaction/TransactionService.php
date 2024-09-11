@@ -2,12 +2,13 @@
 
 namespace App\Application\Service\Transaction;
 
-use App\Application\Service\Wallet\WalletService;
+use App\Adapter\TransactionAuthorizer\TransactionAuthorizerGateway;
 use App\Domain\Entity\Wallet;
 use App\Domain\Exception\Transaction\InsufficientBalanceException;
 use App\Domain\Builder\Transaction\TransactionBuilderInterface;
 use App\Domain\Repository\Transaction\TransactionRepositoryInterface;
 use App\Domain\Service\Transaction\TransactionServiceInterface;
+use App\Domain\Service\Wallet\WalletServiceInterface;
 use App\Infrastructure\Dto\Transaction\CreateTransactionDTO;
 use Exception;
 
@@ -16,7 +17,8 @@ readonly class TransactionService implements TransactionServiceInterface
     public function __construct(
         private TransactionRepositoryInterface $transactionRepository,
         private TransactionBuilderInterface    $transactionBuilder,
-        private WalletService $walletService
+        private TransactionAuthorizerGateway   $transactionAuthorizer,
+        private WalletServiceInterface         $walletService
     ) {
     }
 
@@ -40,8 +42,13 @@ readonly class TransactionService implements TransactionServiceInterface
             $walletSender->addSentTransaction($transaction);
             $walletReceiver->addReceivedTransaction($transaction);
 
+            if (!$this->transactionAuthorizer->authorize()) {
+                throw new Exception();
+            }
+
             $this->transactionRepository->save($transaction);
             $this->transactionRepository->commitTransaction();
+            // TODO Send email
         } catch (InsufficientBalanceException $e) {
             $this->transactionRepository->rollbackTransaction();
             throw new InsufficientBalanceException();
