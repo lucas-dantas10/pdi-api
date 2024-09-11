@@ -2,6 +2,7 @@
 
 namespace App\Domain\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 class Wallet
@@ -11,6 +12,12 @@ class Wallet
     private float $balance;
     private Collection $sentTransactions;
     private Collection $receivedTransactions;
+
+    public function __construct()
+    {
+        $this->sentTransactions = new ArrayCollection();
+        $this->receivedTransactions = new ArrayCollection();
+    }
 
     public function getId(): int
     {
@@ -47,6 +54,11 @@ class Wallet
         $this->sentTransactions = $sentTransactions;
     }
 
+    public function addSentTransaction(Transaction $transaction): void
+    {
+        $this->sentTransactions->add($transaction);
+    }
+
     public function getReceivedTransactions(): Collection
     {
         return $this->receivedTransactions;
@@ -55,5 +67,10 @@ class Wallet
     public function setReceivedTransactions(Collection $receivedTransactions): void
     {
         $this->receivedTransactions = $receivedTransactions;
+    }
+
+    public function addReceivedTransaction(Transaction $transaction): void
+    {
+        $this->receivedTransactions->add($transaction);
     }
 }

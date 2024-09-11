@@ -12,6 +12,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $email;
     private string $cpf;
     private string $password;
+    private Wallet $wallet;
     private array $roles = [];
 
     public function getId(): int
@@ -57,6 +58,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): void
     {
         $this->password = $password;
+    }
+
+    public function getWallet(): Wallet
+    {
+        return $this->wallet;
+    }
+
+    public function setWallet(Wallet $wallet): void
+    {
+        $this->wallet = $wallet;
     }
 
     public function getRoles(): array

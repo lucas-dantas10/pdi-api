@@ -22,9 +22,10 @@ class Transaction
         return $this->senderWallet;
     }
 
-    public function setSenderWallet(Wallet $senderWallet): void
+    public function setSenderWallet(Wallet $senderWallet): Transaction
     {
         $this->senderWallet = $senderWallet;
+        return $this;
     }
 
     public function getReceiverWallet(): Wallet
@@ -32,9 +33,10 @@ class Transaction
         return $this->receiverWallet;
     }
 
-    public function setReceiverWallet(Wallet $receiverWallet): void
+    public function setReceiverWallet(Wallet $receiverWallet): Transaction
     {
         $this->receiverWallet = $receiverWallet;
+        return $this;
     }
 
     public function getAmount(): float
@@ -42,9 +44,10 @@ class Transaction
         return $this->amount;
     }
 
-    public function setAmount(float $amount): void
+    public function setAmount(float $amount): Transaction
     {
         $this->amount = $amount;
+        return $this;
     }
 
     public function getCreatedAt(): DateTime
@@ -52,8 +55,9 @@ class Transaction
         return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTime $createdAt): void
+    public function setCreatedAt(DateTime $createdAt): Transaction
     {
         $this->createdAt = $createdAt;
+        return $this;
     }
 }
