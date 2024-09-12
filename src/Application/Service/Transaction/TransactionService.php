@@ -49,13 +49,12 @@ readonly class TransactionService implements TransactionServiceInterface
             }
 
             $this->transactionRepository->save($transaction);
-            $this->transactionRepository->commitTransaction();
             $this->emailService->sendEmail($walletReceiver->getUser());
+            $this->transactionRepository->commitTransaction();
         } catch (InsufficientBalanceException $e) {
             $this->transactionRepository->rollbackTransaction();
             throw new InsufficientBalanceException();
         } catch (Exception $e) {
-            dd($e);
             $this->transactionRepository->rollbackTransaction();
             throw new Exception("Ocorreu um erro ao criar a transação.");
         }
