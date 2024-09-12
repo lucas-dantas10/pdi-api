@@ -7,6 +7,7 @@ use App\Domain\Entity\Wallet;
 use App\Domain\Exception\Transaction\InsufficientBalanceException;
 use App\Domain\Builder\Transaction\TransactionBuilderInterface;
 use App\Domain\Repository\Transaction\TransactionRepositoryInterface;
+use App\Domain\Service\Email\EmailServiceInterface;
 use App\Domain\Service\Transaction\TransactionServiceInterface;
 use App\Domain\Service\Wallet\WalletServiceInterface;
 use App\Infrastructure\Dto\Transaction\CreateTransactionDTO;
@@ -18,7 +19,8 @@ readonly class TransactionService implements TransactionServiceInterface
         private TransactionRepositoryInterface $transactionRepository,
         private TransactionBuilderInterface    $transactionBuilder,
         private TransactionAuthorizerGateway   $transactionAuthorizer,
-        private WalletServiceInterface         $walletService
+        private WalletServiceInterface         $walletService,
+        private EmailServiceInterface          $emailService
     ) {
     }
 
@@ -48,11 +50,12 @@ readonly class TransactionService implements TransactionServiceInterface
 
             $this->transactionRepository->save($transaction);
             $this->transactionRepository->commitTransaction();
-            // TODO Send email
+            $this->emailService->sendEmail($walletReceiver->getUser());
         } catch (InsufficientBalanceException $e) {
             $this->transactionRepository->rollbackTransaction();
             throw new InsufficientBalanceException();
         } catch (Exception $e) {
+            dd($e);
             $this->transactionRepository->rollbackTransaction();
             throw new Exception("Ocorreu um erro ao criar a transação.");
         }
