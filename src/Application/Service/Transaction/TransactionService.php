@@ -6,6 +6,7 @@ use App\Adapter\TransactionAuthorizer\TransactionAuthorizerGateway;
 use App\Domain\Entity\Wallet;
 use App\Domain\Exception\Transaction\InsufficientBalanceException;
 use App\Domain\Builder\Transaction\TransactionBuilderInterface;
+use App\Domain\Exception\Transaction\NotAuthorizedException;
 use App\Domain\Repository\Transaction\TransactionRepositoryInterface;
 use App\Domain\Service\Email\EmailServiceInterface;
 use App\Domain\Service\Transaction\TransactionServiceInterface;
@@ -45,7 +46,7 @@ readonly class TransactionService implements TransactionServiceInterface
             $walletReceiver->addReceivedTransaction($transaction);
 
             if (!$this->transactionAuthorizer->authorize()) {
-                throw new Exception();
+                throw new NotAuthorizedException();
             }
 
             $this->transactionRepository->save($transaction);
@@ -54,6 +55,9 @@ readonly class TransactionService implements TransactionServiceInterface
         } catch (InsufficientBalanceException $e) {
             $this->transactionRepository->rollbackTransaction();
             throw new InsufficientBalanceException();
+        } catch (NotAuthorizedException $e) {
+            $this->transactionRepository->rollbackTransaction();
+            throw new NotAuthorizedException();
         } catch (Exception $e) {
             $this->transactionRepository->rollbackTransaction();
             throw new Exception("Ocorreu um erro ao criar a transação.");
