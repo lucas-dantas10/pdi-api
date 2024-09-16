@@ -14,8 +14,8 @@ readonly class EmailService implements EmailServiceInterface
     public function sendEmail(User $user): void
     {
         $emailVO = new EmailVO(
-            to: "lucas@example.com",
-            from: "transactions@me.com"
+            to: $user->getEmail(),
+            from: "application@me.com"
         );
 
         $this->messageBus->dispatch($emailVO);
