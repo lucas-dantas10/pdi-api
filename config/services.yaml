@@ -15,3 +15,7 @@ services:
     App\Action\:
         resource: '../src/Action'
         tags: [ 'controller.service_arguments' ]
+
+    App\Infrastructure\Service\TransactionAuthorizer\TransactionAuthorizerService:
+        arguments:
+             $baseUrl: '%env(resolve:TRANSACTION_AUTHORIZER_URL)%'
