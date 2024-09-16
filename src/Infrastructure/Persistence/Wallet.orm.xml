@@ -8,7 +8,7 @@
             <generator/>
         </id>
 
-        <one-to-one field="user" target-entity="App\Domain\Entity\User">
+        <one-to-one field="user" target-entity="App\Domain\Entity\User" inversed-by="wallet">
             <join-column name="nu_seq_user" referenced-column-name="nu_seq_user" />
         </one-to-one>
 

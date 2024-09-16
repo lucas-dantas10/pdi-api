@@ -14,7 +14,7 @@
         <field name="password" column="ds_password" length="255"/>
         <field name="roles" column="json_roles" type="json"/>
 
-        <one-to-one field="wallet" target-entity="App\Domain\Entity\Wallet" inversed-by="user" />
+        <one-to-one field="wallet" target-entity="App\Domain\Entity\Wallet" mapped-by="user" />
 
         <unique-constraints>
             <unique-constraint columns="co_cpf" name="unique_cpf"/>
