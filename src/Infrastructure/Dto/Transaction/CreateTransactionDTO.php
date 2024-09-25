@@ -25,7 +25,8 @@ final readonly class CreateTransactionDTO
         #[Assert\NotNull(message: "Campo de payee é não pode estar null.")]
         #[Assert\Type(type: "integer", message: "O valor deve ser um float.")]
         private int $payee
-    ) { }
+    ) {
+    }
 
     public function getValue(): float
     {
