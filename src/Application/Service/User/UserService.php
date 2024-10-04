@@ -7,6 +7,7 @@ use App\Domain\Repository\User\UserRepositoryInterface;
 use App\Domain\Service\User\UserServiceInterface;
 use App\Domain\Service\Wallet\WalletServiceInterface;
 use App\Infrastructure\Dto\User\CreateUserDTO;
+use Exception;
 use Throwable;
 
 final readonly class UserService implements UserServiceInterface
