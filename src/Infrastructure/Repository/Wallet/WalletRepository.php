@@ -55,4 +55,10 @@ class WalletRepository extends ServiceEntityRepository implements WalletReposito
     {
         $this->getEntityManager()->rollback();
     }
+
+    public function persistAndSave(Wallet $wallet): void
+    {
+        $this->getEntityManager()->persist($wallet);
+        $this->getEntityManager()->flush();
+    }
 }

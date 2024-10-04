@@ -11,4 +11,5 @@ interface UserRepositoryInterface
     public function rollbackTransaction(): void;
     public function persist(User $user): void;
     public function save(): void;
+    public function persistAndSave(User $user): void;
 }

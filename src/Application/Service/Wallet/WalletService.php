@@ -2,15 +2,18 @@
 
 namespace App\Application\Service\Wallet;
 
+use App\Domain\Builder\Wallet\WalletBuilderInterface;
+use App\Domain\Entity\User;
 use App\Domain\Entity\Wallet;
 use App\Domain\Repository\Wallet\WalletRepositoryInterface;
 use App\Domain\Service\Wallet\WalletServiceInterface;
 use Exception;
 
-readonly class WalletService implements WalletServiceInterface
+final readonly class WalletService implements WalletServiceInterface
 {
     public function __construct(
-        private WalletRepositoryInterface $walletRepository
+        private WalletRepositoryInterface $walletRepository,
+        private WalletBuilderInterface $walletBuilder
     ) {
     }
 
@@ -43,5 +46,20 @@ readonly class WalletService implements WalletServiceInterface
     public function findByUser(int $userId): Wallet
     {
         return $this->walletRepository->findByUser($userId);
+    }
+
+    public function createWallet(User $user): void
+    {
+        $this->walletRepository->startTransaction();
+
+        try {
+            $this->walletRepository->persistAndSave(
+                $this->walletBuilder->build($user)
+            );
+            $this->walletRepository->commitTransaction();
+        } catch (Exception $e) {
+            $this->walletRepository->rollbackTransaction();
+            throw new Exception("Ocorreu um erro ao criar a carteira.");
+        }
     }
 }

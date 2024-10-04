@@ -5,7 +5,7 @@ namespace App\Infrastructure\Dto\User;
 use Symfony\Component\Serializer\Attribute\SerializedName;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class CreateUserDTO
+final readonly class CreateUserDTO
 {
     public function __construct(
         #[Assert\NotBlank(message: "Campo de nome full_name é obrigatório.")]
@@ -19,6 +19,18 @@ class CreateUserDTO
         #[Assert\NotNull(message: "Campo de email não pode estar null.")]
         #[Assert\Type(type: "string", message: "O valor deve ser string.")]
         private string $email,
+
+        #[Assert\NotBlank(message: "Campo de cpf é obrigatório.")]
+        #[SerializedName(serializedName: "cpf")]
+        #[Assert\NotNull(message: "Campo de cpf não pode estar null.")]
+        #[Assert\Type(type: "string", message: "O valor deve ser string.")]
+        private string $cpf,
+
+        #[Assert\NotBlank(message: "Campo de tipo do usuário é obrigatório.")]
+        #[SerializedName(serializedName: "tipo_usuario")]
+        #[Assert\NotNull(message: "Campo de tipo do usuário não pode estar null.")]
+        #[Assert\Type(type: "integer", message: "O valor deve ser integer.")]
+        private int $tipoUsuario,
 
         #[Assert\NotBlank(message: "Campo de password é obrigatório.")]
         #[SerializedName(serializedName: "password")]
@@ -36,6 +48,16 @@ class CreateUserDTO
     public function getEmail(): string
     {
         return $this->email;
+    }
+
+    public function getCpf(): string
+    {
+        return $this->cpf;
+    }
+
+    public function getTipoUsuario(): int
+    {
+        return $this->tipoUsuario;
     }
 
     public function getPassword(): string

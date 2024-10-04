@@ -14,4 +14,5 @@ interface WalletRepositoryInterface
     public function rollbackTransaction(): void;
     public function persist(Wallet $wallet): void;
     public function save(): void;
+    public function persistAndSave(Wallet $wallet): void;
 }

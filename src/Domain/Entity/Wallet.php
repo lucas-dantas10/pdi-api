@@ -29,9 +29,10 @@ class Wallet
         return $this->user;
     }
 
-    public function setUser(User $user): void
+    public function setUser(User $user): Wallet
     {
         $this->user = $user;
+        return $this;
     }
 
     public function getBalance(): float
@@ -39,9 +40,10 @@ class Wallet
         return $this->balance;
     }
 
-    public function setBalance(float $balance): void
+    public function setBalance(float $balance): Wallet
     {
         $this->balance = $balance;
+        return $this;
     }
 
     public function getSentTransactions(): Collection
@@ -49,9 +51,10 @@ class Wallet
         return $this->sentTransactions;
     }
 
-    public function setSentTransactions(Collection $sentTransactions): void
+    public function setSentTransactions(Collection $sentTransactions): Wallet
     {
         $this->sentTransactions = $sentTransactions;
+        return $this;
     }
 
     public function addSentTransaction(Transaction $transaction): void
@@ -64,9 +67,10 @@ class Wallet
         return $this->receivedTransactions;
     }
 
-    public function setReceivedTransactions(Collection $receivedTransactions): void
+    public function setReceivedTransactions(Collection $receivedTransactions): Wallet
     {
         $this->receivedTransactions = $receivedTransactions;
+        return $this;
     }
 
     public function addReceivedTransaction(Transaction $transaction): void

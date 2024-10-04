@@ -39,4 +39,10 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
     {
         $this->getEntityManager()->flush();
     }
+
+    public function persistAndSave(User $user): void
+    {
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
+    }
 }

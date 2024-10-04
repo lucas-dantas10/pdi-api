@@ -35,7 +35,6 @@ security:
     access_control:
          - { path: ^/api/login, roles: PUBLIC_ACCESS }
          - { path: ^/api/v1/transaction, roles: [ROLE_COMMON] }
-        # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
     security:
