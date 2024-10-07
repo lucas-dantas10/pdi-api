@@ -1,9 +1,20 @@
 nelmio_api_doc:
     documentation:
+        servers:
+            - url: http://localhost:8000
+              description: DEVELOPMENT
         info:
             title: Transaction API
             description: This is an api for managing transactions
             version: 1.0.0
+        components:
+            securitySchemes:
+                Bearer:
+                    type: http
+                    scheme: bearer
+                    bearerFormat: JWT
+            security:
+                - Bearer: [ ]
     areas:
         path_patterns:
             - ^(?!/(doc\/?.*?|_error\/.+)$)
