@@ -1,0 +1,9 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: Transaction API
+            description: This is an api for managing transactions
+            version: 1.0.0
+    areas:
+        path_patterns:
+            - ^(?!/(doc\/?.*?|_error\/.+)$)

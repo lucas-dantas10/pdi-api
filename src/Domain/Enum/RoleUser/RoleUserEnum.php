@@ -2,6 +2,8 @@
 
 namespace App\Domain\Enum\RoleUser;
 
+use InvalidArgumentException;
+
 enum RoleUserEnum: int
 {
     case ROLE_COMMON = 1;
@@ -12,7 +14,7 @@ enum RoleUserEnum: int
         return match ($id) {
             1 => self::ROLE_COMMON,
             2 => self::ROLE_SHOPKEEPER,
-            default => throw new \InvalidArgumentException('Invalid role id'),
+            default => throw new InvalidArgumentException('Invalid role id'),
         };
     }
 }

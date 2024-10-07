@@ -3,5 +3,11 @@ controllers:
         path: ../src/Action/
         namespace: App\Action
     type: attribute
+
 api_login_check:
     path: /api/v1/login
+
+app.swagger_ui:
+    path: /doc/swagger
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger_ui }
