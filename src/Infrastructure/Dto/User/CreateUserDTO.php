@@ -27,10 +27,10 @@ final readonly class CreateUserDTO
         private string $cpf,
 
         #[Assert\NotBlank(message: "Campo de tipo do usuário é obrigatório.")]
-        #[SerializedName(serializedName: "tipo_usuario")]
+        #[SerializedName(serializedName: "user_type")]
         #[Assert\NotNull(message: "Campo de tipo do usuário não pode estar null.")]
         #[Assert\Type(type: "integer", message: "O valor deve ser integer.")]
-        private int $tipoUsuario,
+        private int $userType,
 
         #[Assert\NotBlank(message: "Campo de password é obrigatório.")]
         #[SerializedName(serializedName: "password")]
@@ -55,9 +55,9 @@ final readonly class CreateUserDTO
         return $this->cpf;
     }
 
-    public function getTipoUsuario(): int
+    public function getUserType(): int
     {
-        return $this->tipoUsuario;
+        return $this->userType;
     }
 
     public function getPassword(): string

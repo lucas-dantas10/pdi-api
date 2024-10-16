@@ -18,7 +18,7 @@ class UserBuilder implements UserBuilderInterface
     public function build(CreateUserDTO $dto): User
     {
         $role = [
-            'role' => RoleUserEnum::getById($dto->getTipoUsuario())->name
+            'role' => RoleUserEnum::getById($dto->getUserType())->name
         ];
 
         $user = (new User())

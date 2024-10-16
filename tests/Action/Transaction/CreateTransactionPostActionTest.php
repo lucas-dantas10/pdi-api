@@ -65,14 +65,12 @@ class CreateTransactionPostActionTest extends WebTestCase
             'value' => 10
         ];
 
-        // Act
         $this->client->request(
             Request::METHOD_POST,
             self::ENDPOINT,
             server: ['CONTENT_TYPE' => 'application/json'],
             content: json_encode($payload)
         );
-
 
         $transactionRepository = $this->entityManager->getRepository(Transaction::class);
         $transaction = $transactionRepository->findOneBy([
@@ -81,7 +79,6 @@ class CreateTransactionPostActionTest extends WebTestCase
             'amount' => 10
         ]);
 
-        // Assert
         $this->assertResponseStatusCodeSame(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
         $this->assertNotNull($transaction);
         $this->assertEquals($user->getId(), $transaction->getSenderWallet()->getUser()->getId());
@@ -93,23 +90,17 @@ class CreateTransactionPostActionTest extends WebTestCase
 
     public function testEmptyPayload(): void
     {
-        // Arrange
         $user = UserFactory::createOne();
-
         WalletFactory::createOne(['user' => $user, 'balance' => 100]);
-
         $user = $this->userRepository->findOneBy(['id' => $user->getId()]);
-
         $this->client->loginUser($user);
 
-        // Act
         $this->client->request(
             Request::METHOD_POST,
             self::ENDPOINT,
             server: ['CONTENT_TYPE' => 'application/json'],
         );
 
-        // Assert
         $this->assertResponseStatusCodeSame(
             Response::HTTP_UNPROCESSABLE_ENTITY,
             $this->client->getResponse()->getStatusCode()
@@ -120,21 +111,16 @@ class CreateTransactionPostActionTest extends WebTestCase
     {
         // Arrange
         $user = UserFactory::createOne();
-
         WalletFactory::createOne(['user' => $user, 'balance' => 100]);
-
         $user = $this->userRepository->findOneBy(['id' => $user->getId()]);
-
         $this->client->loginUser($user);
 
-        // Act
         $this->client->request(
             Request::METHOD_POST,
             self::ENDPOINT,
             server: ['CONTENT_TYPE' => 'application/pdf'],
         );
 
-        // Assert
         $this->assertResponseStatusCodeSame(
             Response::HTTP_UNSUPPORTED_MEDIA_TYPE,
             $this->client->getResponse()->getStatusCode()
@@ -143,18 +129,12 @@ class CreateTransactionPostActionTest extends WebTestCase
 
     public function testPayloadIsNotJson(): void
     {
-        // Arrange
         $user = UserFactory::createOne();
-
         WalletFactory::createOne(['user' => $user, 'balance' => 100]);
-
         $user = $this->userRepository->findOneBy(['id' => $user->getId()]);
-
         $this->client->loginUser($user);
-
         $invalidJson = 'invalid json';
 
-        // Act
         $this->client->request(
             Request::METHOD_POST,
             self::ENDPOINT,
@@ -162,27 +142,20 @@ class CreateTransactionPostActionTest extends WebTestCase
             content: $invalidJson
         );
 
-        // Assert
         $this->assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
     }
 
     public function testEmptyPayer(): void
     {
-        // Arrange
         $user = UserFactory::createOne();
-
         WalletFactory::createOne(['user' => $user, 'balance' => 100]);
-
         $user = $this->userRepository->findOneBy(['id' => $user->getId()]);
-
         $this->client->loginUser($user);
-
         $payload = [
             'payee' => $user->getId(),
             'value' => 10
         ];
 
-        // Act
         $this->client->request(
             Request::METHOD_POST,
             self::ENDPOINT,
@@ -191,7 +164,6 @@ class CreateTransactionPostActionTest extends WebTestCase
         );
         $response = json_decode($this->client->getResponse()->getContent());
 
-        // Assert
         $this->assertResponseStatusCodeSame(
             Response::HTTP_UNPROCESSABLE_ENTITY,
             $this->client->getResponse()->getStatusCode()
@@ -201,21 +173,15 @@ class CreateTransactionPostActionTest extends WebTestCase
 
     public function testEmptyPayee(): void
     {
-        // Arrange
         $user = UserFactory::createOne();
-
         WalletFactory::createOne(['user' => $user, 'balance' => 100]);
-
         $user = $this->userRepository->findOneBy(['id' => $user->getId()]);
-
         $this->client->loginUser($user);
-
         $payload = [
             'payer' => $user->getId(),
             'value' => 10
         ];
 
-        // Act
         $this->client->request(
             Request::METHOD_POST,
             self::ENDPOINT,
@@ -224,7 +190,6 @@ class CreateTransactionPostActionTest extends WebTestCase
         );
         $response = json_decode($this->client->getResponse()->getContent());
 
-        // Assert
         $this->assertResponseStatusCodeSame(
             Response::HTTP_UNPROCESSABLE_ENTITY,
             $this->client->getResponse()->getStatusCode()
@@ -234,21 +199,15 @@ class CreateTransactionPostActionTest extends WebTestCase
 
     public function testEmptyValue(): void
     {
-        // Arrange
         $user = UserFactory::createOne();
-
         WalletFactory::createOne(['user' => $user, 'balance' => 100]);
-
         $user = $this->userRepository->findOneBy(['id' => $user->getId()]);
-
         $this->client->loginUser($user);
-
         $payload = [
             'payer' => $user->getId(),
             'payee' => $user->getId()
         ];
 
-        // Act
         $this->client->request(
             Request::METHOD_POST,
             self::ENDPOINT,
@@ -257,7 +216,6 @@ class CreateTransactionPostActionTest extends WebTestCase
         );
         $response = json_decode($this->client->getResponse()->getContent());
 
-        // Assert
         $this->assertResponseStatusCodeSame(
             Response::HTTP_UNPROCESSABLE_ENTITY,
             $this->client->getResponse()->getStatusCode()
@@ -267,22 +225,16 @@ class CreateTransactionPostActionTest extends WebTestCase
 
     public function testInsufficientBalance(): void
     {
-        // Arrange
         $user = UserFactory::createOne();
-
         WalletFactory::createOne(['user' => $user, 'balance' => 100]);
-
         $user = $this->userRepository->findOneBy(['id' => $user->getId()]);
-
         $this->client->loginUser($user);
-
         $payload = [
             'payer' => $user->getId(),
             'payee' => $user->getId(),
             'value' => 50000
         ];
 
-        // Act
         $this->client->request(
             Request::METHOD_POST,
             self::ENDPOINT,
@@ -291,7 +243,6 @@ class CreateTransactionPostActionTest extends WebTestCase
         );
         $response = json_decode($this->client->getResponse()->getContent());
 
-        // Assert
         $this->assertResponseStatusCodeSame(
             Response::HTTP_INTERNAL_SERVER_ERROR,
             $this->client->getResponse()->getStatusCode()
