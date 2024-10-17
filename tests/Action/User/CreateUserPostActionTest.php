@@ -53,7 +53,7 @@ class CreateUserPostActionTest extends WebTestCase
         );
         $userCreated = $this->userRepository->findOneBy(['email' => "QqgBZ@example.com"]);
 
-        $this->assertResponseStatusCodeSame(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+        $this->assertResponseStatusCodeSame(Response::HTTP_CREATED);
         $this->assertNotNull($userCreated);
         $this->assertJson($this->client->getResponse()->getContent());
         $this->assertEquals("QqgBZ@example.com", $userCreated->getEmail());
@@ -77,7 +77,7 @@ class CreateUserPostActionTest extends WebTestCase
         );
         $userCreated = $this->userRepository->findOneBy(['email' => "QqgBZ@example.com"]);
 
-        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
         $this->assertNull($userCreated);
     }
 
@@ -96,7 +96,7 @@ class CreateUserPostActionTest extends WebTestCase
         );
         $userCreated = $this->userRepository->findOneBy(['email' => "QqgBZ@example.com"]);
 
-        $this->assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
+        $this->assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST);
         $this->assertNull($userCreated);
     }
 
@@ -121,7 +121,7 @@ class CreateUserPostActionTest extends WebTestCase
         $userCreated = $this->userRepository->findOneBy(['email' => "QqgBZ@example.com"]);
 
         $response = json_decode($this->client->getResponse()->getContent());
-        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
         $this->assertNull($userCreated);
         $this->assertEquals("email: This value should be of type string.", $response->detail);
     }
@@ -147,7 +147,7 @@ class CreateUserPostActionTest extends WebTestCase
         $userCreated = $this->userRepository->findOneBy(['email' => "QqgBZ@example.com"]);
 
         $response = json_decode($this->client->getResponse()->getContent());
-        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
         $this->assertNull($userCreated);
         $this->assertEquals("fullName: This value should be of type string.", $response->detail);
     }
@@ -173,12 +173,12 @@ class CreateUserPostActionTest extends WebTestCase
         $userCreated = $this->userRepository->findOneBy(['email' => "QqgBZ@example.com"]);
 
         $response = json_decode($this->client->getResponse()->getContent());
-        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
         $this->assertNull($userCreated);
         $this->assertEquals("cpf: This value should be of type string.", $response->detail);
     }
 
-    public function testEmptyTipoUsuario(): void
+    public function testEmptyUserType(): void
     {
         $user = UserFactory::createOne();
         $user = $this->userRepository->findOneBy(['id' => $user->getId()]);
@@ -199,7 +199,7 @@ class CreateUserPostActionTest extends WebTestCase
         $userCreated = $this->userRepository->findOneBy(['email' => "QqgBZ@example.com"]);
 
         $response = json_decode($this->client->getResponse()->getContent());
-        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
         $this->assertNull($userCreated);
         $this->assertEquals("userType: This value should be of type int.", $response->detail);
     }
@@ -225,7 +225,7 @@ class CreateUserPostActionTest extends WebTestCase
         $userCreated = $this->userRepository->findOneBy(['email' => "QqgBZ@example.com"]);
 
         $response = json_decode($this->client->getResponse()->getContent());
-        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
         $this->assertNull($userCreated);
         $this->assertEquals("password: This value should be of type string.", $response->detail);
     }

@@ -79,7 +79,7 @@ class CreateTransactionPostActionTest extends WebTestCase
             'amount' => 10
         ]);
 
-        $this->assertResponseStatusCodeSame(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+        $this->assertResponseStatusCodeSame(Response::HTTP_CREATED);
         $this->assertNotNull($transaction);
         $this->assertEquals($user->getId(), $transaction->getSenderWallet()->getUser()->getId());
         $this->assertEquals($user2->getId(), $transaction->getReceiverWallet()->getUser()->getId());
@@ -101,10 +101,7 @@ class CreateTransactionPostActionTest extends WebTestCase
             server: ['CONTENT_TYPE' => 'application/json'],
         );
 
-        $this->assertResponseStatusCodeSame(
-            Response::HTTP_UNPROCESSABLE_ENTITY,
-            $this->client->getResponse()->getStatusCode()
-        );
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     public function testContentTypeIncorrect(): void
@@ -121,10 +118,7 @@ class CreateTransactionPostActionTest extends WebTestCase
             server: ['CONTENT_TYPE' => 'application/pdf'],
         );
 
-        $this->assertResponseStatusCodeSame(
-            Response::HTTP_UNSUPPORTED_MEDIA_TYPE,
-            $this->client->getResponse()->getStatusCode()
-        );
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNSUPPORTED_MEDIA_TYPE);
     }
 
     public function testPayloadIsNotJson(): void
@@ -142,7 +136,7 @@ class CreateTransactionPostActionTest extends WebTestCase
             content: $invalidJson
         );
 
-        $this->assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
+        $this->assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST);
     }
 
     public function testEmptyPayer(): void
@@ -164,10 +158,7 @@ class CreateTransactionPostActionTest extends WebTestCase
         );
         $response = json_decode($this->client->getResponse()->getContent());
 
-        $this->assertResponseStatusCodeSame(
-            Response::HTTP_UNPROCESSABLE_ENTITY,
-            $this->client->getResponse()->getStatusCode()
-        );
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
         $this->assertEquals("payer: This value should be of type int.", $response->detail);
     }
 
@@ -190,10 +181,7 @@ class CreateTransactionPostActionTest extends WebTestCase
         );
         $response = json_decode($this->client->getResponse()->getContent());
 
-        $this->assertResponseStatusCodeSame(
-            Response::HTTP_UNPROCESSABLE_ENTITY,
-            $this->client->getResponse()->getStatusCode()
-        );
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
         $this->assertEquals("payee: This value should be of type int.", $response->detail);
     }
 
@@ -216,10 +204,7 @@ class CreateTransactionPostActionTest extends WebTestCase
         );
         $response = json_decode($this->client->getResponse()->getContent());
 
-        $this->assertResponseStatusCodeSame(
-            Response::HTTP_UNPROCESSABLE_ENTITY,
-            $this->client->getResponse()->getStatusCode()
-        );
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
         $this->assertEquals("value: This value should be of type float.", $response->detail);
     }
 
@@ -243,10 +228,7 @@ class CreateTransactionPostActionTest extends WebTestCase
         );
         $response = json_decode($this->client->getResponse()->getContent());
 
-        $this->assertResponseStatusCodeSame(
-            Response::HTTP_INTERNAL_SERVER_ERROR,
-            $this->client->getResponse()->getStatusCode()
-        );
+        $this->assertResponseStatusCodeSame(Response::HTTP_INTERNAL_SERVER_ERROR);
         $this->assertEquals("Saldo insuficiente", $response->detail);
     }
 }
