@@ -7,9 +7,14 @@ use App\Domain\Entity\User;
 interface UserRepositoryInterface
 {
     public function startTransaction(): void;
+
     public function commitTransaction(): void;
+
     public function rollbackTransaction(): void;
+
     public function persist(User $user): void;
+
     public function save(): void;
+
     public function persistAndSave(User $user): void;
 }

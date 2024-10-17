@@ -3,7 +3,6 @@
 namespace App\Infrastructure\Repository\User;
 
 use App\Domain\Entity\User;
-use App\Domain\Repository\User\CreateUserDTO;
 use App\Domain\Repository\User\UserRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;

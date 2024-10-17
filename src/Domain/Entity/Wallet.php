@@ -32,6 +32,7 @@ class Wallet
     public function setUser(User $user): Wallet
     {
         $this->user = $user;
+
         return $this;
     }
 
@@ -43,6 +44,7 @@ class Wallet
     public function setBalance(float $balance): Wallet
     {
         $this->balance = $balance;
+
         return $this;
     }
 
@@ -54,6 +56,7 @@ class Wallet
     public function setSentTransactions(Collection $sentTransactions): Wallet
     {
         $this->sentTransactions = $sentTransactions;
+
         return $this;
     }
 
@@ -70,6 +73,7 @@ class Wallet
     public function setReceivedTransactions(Collection $receivedTransactions): Wallet
     {
         $this->receivedTransactions = $receivedTransactions;
+
         return $this;
     }
 

@@ -9,7 +9,9 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 #[AsMessageHandler]
 readonly class EmailQueueHandler
 {
-    public function __construct(private EmailServiceGateway $emailService) {}
+    public function __construct(private EmailServiceGateway $emailService)
+    {
+    }
 
     public function __invoke(EmailVO $emailVO): void
     {

@@ -11,6 +11,6 @@ interface TransactionBuilderInterface
     public function build(
         CreateTransactionDTO $dto,
         Wallet $sender,
-        Wallet $receiver
+        Wallet $receiver,
     ): Transaction;
 }

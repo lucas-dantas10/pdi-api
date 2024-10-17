@@ -28,6 +28,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setFullName(string $fullName): User
     {
         $this->fullName = $fullName;
+
         return $this;
     }
 
@@ -39,6 +40,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): User
     {
         $this->email = $email;
+
         return $this;
     }
 
@@ -50,6 +52,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCpf(string $cpf): User
     {
         $this->cpf = $cpf;
+
         return $this;
     }
 
@@ -61,6 +64,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): User
     {
         $this->password = $password;
+
         return $this;
     }
 
@@ -72,12 +76,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setWallet(?Wallet $wallet): User
     {
         $this->wallet = $wallet;
+
         return $this;
     }
 
     public function setRoles(array $roles): User
     {
         $this->roles = $roles;
+
         return $this;
     }
 

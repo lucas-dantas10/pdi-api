@@ -13,18 +13,16 @@ final readonly class CreateTransactionDTO
         #[Assert\NotNull(message: "Campo de value é não pode estar null.")]
         #[Assert\Type(type: "float", message: "O valor deve ser um float.")]
         private float $value,
-
         #[Assert\NotBlank(message: "Campo de payer é obrigatório.")]
         #[SerializedName(serializedName: "payer")]
         #[Assert\NotNull(message: "Campo de payer é não pode estar null.")]
         #[Assert\Type(type: "integer", message: "O valor deve ser um float.")]
         private int $payer,
-
         #[Assert\NotBlank(message: "Campo de payee é obrigatório.")]
         #[SerializedName(serializedName: "payee")]
         #[Assert\NotNull(message: "Campo de payee é não pode estar null.")]
         #[Assert\Type(type: "integer", message: "O valor deve ser um float.")]
-        private int $payee
+        private int $payee,
     ) {
     }
 

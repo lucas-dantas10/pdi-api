@@ -9,7 +9,9 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 readonly class EmailService implements EmailServiceInterface
 {
-    public function __construct(private MessageBusInterface $messageBus) {}
+    public function __construct(private MessageBusInterface $messageBus)
+    {
+    }
 
     public function sendEmail(User $user): void
     {

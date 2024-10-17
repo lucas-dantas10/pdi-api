@@ -4,16 +4,16 @@ namespace App\Action\User;
 
 use App\Domain\Service\User\UserServiceInterface;
 use App\Infrastructure\Dto\User\CreateUserDTO;
+use OpenApi\Attributes as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Attribute\Route;
-use OpenApi\Attributes as OA;
 
 final readonly class CreateUserPostAction
 {
     public function __construct(
-        private UserServiceInterface $userService
+        private UserServiceInterface $userService,
     ) {
     }
 
@@ -24,7 +24,7 @@ final readonly class CreateUserPostAction
         response: 201,
         description: "Created User",
         content: new OA\JsonContent(
-            properties:[ new OA\Property(property: "message", type: "string", example: "Usuário criado com sucesso")]
+            properties:[new OA\Property(property: "message", type: "string", example: "Usuário criado com sucesso")]
         )
     )]
     #[OA\Response(response: 422, description: "Unprocessable Entity")]

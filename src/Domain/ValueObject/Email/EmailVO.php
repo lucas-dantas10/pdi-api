@@ -6,7 +6,7 @@ class EmailVO
 {
     public function __construct(
         private string $to,
-        private string $from
+        private string $from,
     ) {
     }
 

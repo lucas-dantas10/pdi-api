@@ -2,7 +2,6 @@
 
 namespace App\Application\Builder\Transaction;
 
-use DateTime;
 use App\Domain\Builder\Transaction\TransactionBuilderInterface;
 use App\Domain\Entity\Transaction;
 use App\Domain\Entity\Wallet;
@@ -13,13 +12,12 @@ class TransactionBuilder implements TransactionBuilderInterface
     public function build(
         CreateTransactionDTO $dto,
         Wallet $sender,
-        Wallet $receiver
-    ): Transaction
-    {
+        Wallet $receiver,
+    ): Transaction {
         return (new Transaction())
             ->setSenderWallet($sender)
             ->setReceiverWallet($receiver)
             ->setAmount($dto->getValue())
-            ->setCreatedAt(new DateTime());
+            ->setCreatedAt(new \DateTime());
     }
 }

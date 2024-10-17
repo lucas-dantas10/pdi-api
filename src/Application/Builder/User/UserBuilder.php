@@ -11,14 +11,14 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class UserBuilder implements UserBuilderInterface
 {
     public function __construct(
-        private readonly UserPasswordHasherInterface $passwordHasher
+        private readonly UserPasswordHasherInterface $passwordHasher,
     ) {
     }
 
     public function build(CreateUserDTO $dto): User
     {
         $role = [
-            'role' => RoleUserEnum::getById($dto->getUserType())->name
+            'role' => RoleUserEnum::getById($dto->getUserType())->name,
         ];
 
         $user = (new User())

@@ -4,16 +4,16 @@ namespace App\Action\Transaction;
 
 use App\Domain\Service\Transaction\TransactionServiceInterface;
 use App\Infrastructure\Dto\Transaction\CreateTransactionDTO;
+use OpenApi\Attributes as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Attribute\Route;
-use OpenApi\Attributes as OA;
 
 final readonly class CreateTransactionPostAction
 {
     public function __construct(
-        private TransactionServiceInterface $transactionService
+        private TransactionServiceInterface $transactionService,
     ) {
     }
 

@@ -13,7 +13,7 @@ readonly class TransactionAuthorizerService implements TransactionAuthorizerGate
 {
     public function __construct(
         private HttpClientInterface $client,
-        private string $baseUrl
+        private string $baseUrl,
     ) {
     }
 
@@ -30,9 +30,9 @@ readonly class TransactionAuthorizerService implements TransactionAuthorizerGate
             return $content['status'];
         } catch (
             ClientExceptionInterface
-            | RedirectionExceptionInterface
-            | ServerExceptionInterface
-            | TransportExceptionInterface $e
+            |RedirectionExceptionInterface
+            |ServerExceptionInterface
+            |TransportExceptionInterface $e
         ) {
             return false;
         }
