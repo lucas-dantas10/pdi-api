@@ -86,6 +86,7 @@
         "friendsofphp/php-cs-fixer": "^3.64",
         "phpstan/phpstan": "^1.12",
         "phpunit/phpunit": "^9.5",
+        "rector/rector": "^1.2",
         "symfony/browser-kit": "7.0.*",
         "symfony/css-selector": "7.0.*",
         "symfony/maker-bundle": "^1.61",
