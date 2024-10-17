@@ -5,8 +5,8 @@ namespace App\Domain\ValueObject\Email;
 class EmailVO
 {
     public function __construct(
-        private string $to,
-        private string $from,
+        private readonly string $to,
+        private readonly string $from,
     ) {
     }
 

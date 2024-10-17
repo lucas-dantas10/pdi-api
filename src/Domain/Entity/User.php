@@ -7,12 +7,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    private int $id;
+    private readonly int $id;
     private string $fullName;
     private string $email;
     private string $cpf;
     private string $password;
-    private ?Wallet $wallet;
+    private ?Wallet $wallet = null;
     private array $roles = [];
 
     public function getId(): int
@@ -56,6 +56,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    #[\Override]
     public function getPassword(): string
     {
         return $this->password;
@@ -87,6 +88,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    #[\Override]
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -95,11 +97,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
+    #[\Override]
     public function eraseCredentials(): void
     {
         // TODO: Implement eraseCredentials() method.
     }
 
+    #[\Override]
     public function getUserIdentifier(): string
     {
         return $this->email;

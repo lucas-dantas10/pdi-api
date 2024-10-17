@@ -8,6 +8,7 @@ use App\Domain\Entity\Wallet;
 
 class WalletBuilder implements WalletBuilderInterface
 {
+    #[\Override]
     public function build(User $user): Wallet
     {
         return (new Wallet())

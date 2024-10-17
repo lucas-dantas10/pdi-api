@@ -13,6 +13,7 @@ readonly class EmailService implements EmailServiceInterface
     {
     }
 
+    #[\Override]
     public function sendEmail(User $user): void
     {
         $emailVO = new EmailVO(

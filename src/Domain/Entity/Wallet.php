@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\Collection;
 
 class Wallet
 {
-    private int $id;
+    private readonly int $id;
     private User $user;
     private float $balance;
     private Collection $sentTransactions;

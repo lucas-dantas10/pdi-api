@@ -15,6 +15,7 @@ readonly class MailerEmailService implements EmailServiceGateway
     ) {
     }
 
+    #[\Override]
     public function sendEmail(EmailVO $emailVO): void
     {
         try {
@@ -25,7 +26,7 @@ readonly class MailerEmailService implements EmailServiceGateway
                 ->text("Você recebeu uma transação com sucesso!");
 
             $this->mailer->send($email);
-        } catch (TransportExceptionInterface $e) {
+        } catch (TransportExceptionInterface) {
             throw new \Exception("Erro ao enviar email");
         }
     }

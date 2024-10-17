@@ -16,6 +16,7 @@ final readonly class WalletService implements WalletServiceInterface
     ) {
     }
 
+    #[\Override]
     public function withdraw(Wallet $wallet, float $amount): void
     {
         $this->walletRepository->startTransaction();
@@ -23,13 +24,14 @@ final readonly class WalletService implements WalletServiceInterface
         try {
             $this->walletRepository->withdraw($wallet, $amount);
             $this->walletRepository->commitTransaction();
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             $this->walletRepository->rollbackTransaction();
 
             throw new \Exception("Ocorreu um erro ao realizar uma retirada.");
         }
     }
 
+    #[\Override]
     public function deposit(Wallet $wallet, float $amount): void
     {
         $this->walletRepository->startTransaction();
@@ -37,18 +39,20 @@ final readonly class WalletService implements WalletServiceInterface
         try {
             $this->walletRepository->deposit($wallet, $amount);
             $this->walletRepository->commitTransaction();
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             $this->walletRepository->rollbackTransaction();
 
             throw new \Exception("Ocorreu um erro ao realizar um deposito.");
         }
     }
 
+    #[\Override]
     public function findByUser(int $userId): Wallet
     {
         return $this->walletRepository->findByUser($userId);
     }
 
+    #[\Override]
     public function createWallet(User $user): void
     {
         $this->walletRepository->startTransaction();
@@ -58,7 +62,7 @@ final readonly class WalletService implements WalletServiceInterface
                 $this->walletBuilder->build($user)
             );
             $this->walletRepository->commitTransaction();
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             $this->walletRepository->rollbackTransaction();
 
             throw new \Exception("Ocorreu um erro ao criar a carteira.");

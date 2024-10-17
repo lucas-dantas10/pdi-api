@@ -24,6 +24,7 @@ readonly class TransactionService implements TransactionServiceInterface
     ) {
     }
 
+    #[\Override]
     public function createTransaction(CreateTransactionDTO $dto): void
     {
         $this->transactionRepository->startTransaction();
@@ -51,15 +52,15 @@ readonly class TransactionService implements TransactionServiceInterface
             $this->transactionRepository->save($transaction);
             $this->emailService->sendEmail($walletReceiver->getUser());
             $this->transactionRepository->commitTransaction();
-        } catch (InsufficientBalanceException $e) {
+        } catch (InsufficientBalanceException) {
             $this->transactionRepository->rollbackTransaction();
 
             throw new InsufficientBalanceException();
-        } catch (NotAuthorizedException $e) {
+        } catch (NotAuthorizedException) {
             $this->transactionRepository->rollbackTransaction();
 
             throw new NotAuthorizedException();
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             $this->transactionRepository->rollbackTransaction();
 
             throw new \Exception("Ocorreu um erro ao criar a transação.");

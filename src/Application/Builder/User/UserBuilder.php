@@ -15,6 +15,7 @@ class UserBuilder implements UserBuilderInterface
     ) {
     }
 
+    #[\Override]
     public function build(CreateUserDTO $dto): User
     {
         $role = [

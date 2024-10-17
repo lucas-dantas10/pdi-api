@@ -9,6 +9,7 @@ use App\Infrastructure\Dto\Transaction\CreateTransactionDTO;
 
 class TransactionBuilder implements TransactionBuilderInterface
 {
+    #[\Override]
     public function build(
         CreateTransactionDTO $dto,
         Wallet $sender,

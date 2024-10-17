@@ -4,7 +4,7 @@ namespace App\Domain\Entity;
 
 class Transaction
 {
-    private int $id;
+    private readonly int $id;
     private Wallet $senderWallet;
     private Wallet $receiverWallet;
     private float $amount;

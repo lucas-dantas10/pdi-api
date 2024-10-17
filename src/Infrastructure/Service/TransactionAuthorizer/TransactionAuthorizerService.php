@@ -17,6 +17,7 @@ readonly class TransactionAuthorizerService implements TransactionAuthorizerGate
     ) {
     }
 
+    #[\Override]
     public function authorize(): bool
     {
         try {
@@ -32,7 +33,7 @@ readonly class TransactionAuthorizerService implements TransactionAuthorizerGate
             ClientExceptionInterface
             |RedirectionExceptionInterface
             |ServerExceptionInterface
-            |TransportExceptionInterface $e
+            |TransportExceptionInterface
         ) {
             return false;
         }

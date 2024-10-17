@@ -17,6 +17,7 @@ final readonly class UserService implements UserServiceInterface
     ) {
     }
 
+    #[\Override]
     public function createUser(CreateUserDTO $dto): void
     {
         $this->userRepository->startTransaction();
@@ -27,7 +28,7 @@ final readonly class UserService implements UserServiceInterface
             $this->userRepository->persistAndSave($user);
             $this->walletService->createWallet($user);
             $this->userRepository->commitTransaction();
-        } catch (\Throwable $e) {
+        } catch (\Throwable) {
             $this->userRepository->rollbackTransaction();
 
             throw new \Exception("Ocorreu um erro ao criar o usuário.");
