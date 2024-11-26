@@ -19,7 +19,8 @@ use Zenstruck\Foundry\Test\ResetDatabase;
  */
 class CreateTransactionPostActionTest extends WebTestCase
 {
-    use ResetDatabase, Factories;
+    use ResetDatabase;
+    use Factories;
 
     private const string ENDPOINT = '/api/v1/create/transaction';
 
@@ -62,7 +63,7 @@ class CreateTransactionPostActionTest extends WebTestCase
         $payload = [
             'payer' => $user->getId(),
             'payee' => $user2->getId(),
-            'value' => 10
+            'value' => 10,
         ];
 
         $this->client->request(
@@ -76,7 +77,7 @@ class CreateTransactionPostActionTest extends WebTestCase
         $transaction = $transactionRepository->findOneBy([
             'senderWallet' => $user->getWallet()->getId(),
             'receiverWallet' => $user2->getWallet()->getId(),
-            'amount' => 10
+            'amount' => 10,
         ]);
 
         $this->assertResponseStatusCodeSame(Response::HTTP_CREATED);
@@ -147,7 +148,7 @@ class CreateTransactionPostActionTest extends WebTestCase
         $this->client->loginUser($user);
         $payload = [
             'payee' => $user->getId(),
-            'value' => 10
+            'value' => 10,
         ];
 
         $this->client->request(
@@ -170,7 +171,7 @@ class CreateTransactionPostActionTest extends WebTestCase
         $this->client->loginUser($user);
         $payload = [
             'payer' => $user->getId(),
-            'value' => 10
+            'value' => 10,
         ];
 
         $this->client->request(
@@ -193,7 +194,7 @@ class CreateTransactionPostActionTest extends WebTestCase
         $this->client->loginUser($user);
         $payload = [
             'payer' => $user->getId(),
-            'payee' => $user->getId()
+            'payee' => $user->getId(),
         ];
 
         $this->client->request(
@@ -217,7 +218,7 @@ class CreateTransactionPostActionTest extends WebTestCase
         $payload = [
             'payer' => $user->getId(),
             'payee' => $user->getId(),
-            'value' => 50000
+            'value' => 50000,
         ];
 
         $this->client->request(
