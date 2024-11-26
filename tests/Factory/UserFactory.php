@@ -3,6 +3,7 @@
 namespace App\Tests\Factory;
 
 use App\Domain\Entity\User;
+use App\Domain\Enum\RoleUser\RoleUserEnum;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
@@ -36,7 +37,7 @@ final class UserFactory extends PersistentProxyObjectFactory
             'email' => self::faker()->email(),
             'fullName' => self::faker()->name(),
             'password' => self::faker()->password(10),
-            'roles' => [],
+            'roles' => [RoleUserEnum::ROLE_COMMON->name],
         ];
     }
 
