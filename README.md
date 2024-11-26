@@ -8,6 +8,7 @@ Um sistema simples para gerenciamento de transações e usuários. Este projeto 
 - [Características](#características)
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [Instalação](#instalação)
+- [Como Testar](#teste)
 - [Documentação](#documentação-api)
   - [Autenticação](#autenticação)
   - [Login](#login)
@@ -50,6 +51,31 @@ sudo docker compose up -d
 
 # Instale as dependências
 sudo docker compose exec app composer install
+```
+
+## Como Testar
+
+Para testar o projeto, basta utilizar o comando abaixo:
+
+```bash
+sudo docker compose exec app php bin/phpunit
+```
+
+Caso queira testar um teste específico, basta utilizar o comando abaixo:
+
+```bash
+sudo docker compose exec app php bin/phpunit --group <nome-do-grupo>
+```
+
+O nome do grupo fica em cima da classe de teste, vai ter algo desse tipo:
+
+```php
+  /**
+   * @group test
+   */
+  class CreateSomethingTest extends TestCase
+  {
+  }
 ```
 
 ## Documentação API
