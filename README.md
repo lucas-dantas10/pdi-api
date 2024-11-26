@@ -8,7 +8,7 @@ Um sistema simples para gerenciamento de transações e usuários. Este projeto 
 - [Características](#características)
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [Instalação](#instalação)
-- [Como Testar](#teste)
+- [Como Testar](#como-testar)
 - [Documentação](#documentação-api)
   - [Autenticação](#autenticação)
   - [Login](#login)
